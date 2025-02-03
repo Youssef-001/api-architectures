@@ -12,6 +12,8 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.12.5",
     "@grpc/proto-loader": "^0.7.13",
-    "chokidar": "^4.0.3"
-  }
+    "chokidar": "^4.0.3",
+    "dateformat": "^5.0.3"
+  },
+  "type":"module"
 }

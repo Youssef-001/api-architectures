@@ -1,9 +1,8 @@
 
-
-const grpc = require('@grpc/grpc-js')
-const protoLoader = require('@grpc/proto-loader');
-const chokidar = require('chokidar')
-
+import grpc from '@grpc/grpc-js';
+import protoLoader from '@grpc/proto-loader';
+import chokidar from 'chokidar';
+import dateFormat from 'dateformat';
 const PROTO_PATH = './file_watcher.proto';
 
 const packageDefinition = protoLoader.loadSync(PROTO_PATH);
@@ -14,7 +13,8 @@ let recentChanges = [];
 
 function onChange(path, event, call)
 {
-    const change = { path, event, timestamp: Date.now() };
+  let date = dateFormat(Date.now(), "dddd, mmmm dS, yyyy, h:MM:ss TT");
+    const change = { path, event, timestamp: date };
 
     recentChanges.push(change);
 
