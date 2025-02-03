@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+service FileWatcher {
+    rpc GetRecentChanges (Empty) returns (RecentChanges)
+    rpc WatchDirectory (WatchRequest) returns (stream FileChange)
+}
+
+message Empty{}
+
+
+message WatchRequest {
+    string path = 1;
+}
+
+message FileChange {
+    string path = 1;
+    string event = 2;
+    int64 timestamp = 3;
+}
+
+message RecentChanges {
+    repeated FileChange changes = 1;
+  }
