@@ -10,6 +10,7 @@ const resolvers = {
         games() {
             return db.games;
         },
+  
 
         reviews() {
             return db.reviews
@@ -30,8 +31,36 @@ const resolvers = {
         author(_,args)
         {
             return db.authors.find((author) => (author.id === args.id))
+        },
+
+    },
+    
+    Game: {
+        reviews(parent){
+            // parent is refrence to value returned by previous/parent resolver
+            return db.reviews.filter((review) => review.game_id === parent.id)
+        }
+    },
+
+    Author: {
+        reviews(parent)
+        {
+            return db.reviews.filter((review) => review.author_id === parent.id)
+        }
+    },
+
+    Review: {
+        author(parent) 
+        {
+            return db.authors.find((author) => (author.id === parent.author_id))
+        },
+
+        game(parent) 
+        {
+            return db.games.find((game) => (game.id == parent.game_id))
         }
     }
+    
 }
 
 const server = new ApolloServer({
@@ -45,3 +74,5 @@ const {url} = await startStandaloneServer(server, {
 })
 
 console.log('Server ready at port: 7000');
+
+
