@@ -23,8 +23,11 @@ type Author {
 
 type Query {
     reviews: [Review]
+    review(id:ID!): Review
     games: [Game]
+    game(id:ID!) : Game
     authors: [Author]
+    author(id:ID!) : Author
 }
 
 `
